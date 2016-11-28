@@ -11,6 +11,8 @@ This tool provides the metric collection agents for the following New Relic plug
 - ElastiCache
   - Memcached
   - Redis
+- Kinesis
+- Lambda
 
 ## Dependencies
 - A single t1.micro EC2 instance (in any region)
