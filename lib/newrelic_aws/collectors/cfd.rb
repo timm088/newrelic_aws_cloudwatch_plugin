@@ -24,7 +24,7 @@ module NewRelicAWS
 
       def collect
         data_points = []
-        id.each do | distribution_id |
+        cloudfront_distributions.each do | distribution_id |
           metric_list.each do |(metric_name, statistic, unit, default_value)|
             data_point = get_data_point(
               :namespace     => "AWS/CloudFront",
