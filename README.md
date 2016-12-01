@@ -13,6 +13,7 @@ This tool provides the metric collection agents for the following New Relic plug
   - Redis
 - Kinesis
 - Lambda
+- CloudFront
 
 ## Dependencies
 - A single t1.micro EC2 instance (in any region)
@@ -60,6 +61,8 @@ The plugin can also be configured to query specific CloudWatch regions, e.g. `us
     -
       us-west-1
 ```
+Please note that the CloudFront collector needs to connect with the Global region and as a result has a specific method built into the code which has the region of us-east-1 hardcoded.
+
 
 ### Amazon ElastiCache
 

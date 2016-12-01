@@ -68,4 +68,7 @@ agents:
     enabled: false
   kin:
     enabled: false
-
+  lam:
+    enabled: false
+  cfd:
+    enabled: false
