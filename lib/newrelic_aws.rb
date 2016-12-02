@@ -213,6 +213,14 @@ module NewRelicAWS
     end
   end
 
+  module CFD
+    class Agent < Base::Agent
+      agent_guid "com.newrelic.aws.cfd"
+      agent_version NewRelicAWS::VERSION
+      agent_human_labels("CloudFront") { "CloudFront" }
+    end
+  end
+
   #
   # Register each agent with the component.
   #
@@ -227,6 +235,7 @@ module NewRelicAWS
   NewRelic::Plugin::Setup.install_agent :ecr, ECR if NewRelicAWS::agent_enabled?(:ecr)
   NewRelic::Plugin::Setup.install_agent :kin, KIN if NewRelicAWS::agent_enabled?(:kin)
   NewRelic::Plugin::Setup.install_agent :lam, LAM if NewRelicAWS::agent_enabled?(:lam)
+  NewRelic::Plugin::Setup.install_agent :cfd, CFD if NewRelicAWS::agent_enabled?(:cfd)
 
   #
   # Launch the agents; this never returns.
