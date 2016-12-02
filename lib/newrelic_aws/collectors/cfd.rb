@@ -7,7 +7,7 @@ module NewRelicAWS
           :secret_access_key => @aws_secret_key,
           :region => @aws_region,
           :http_proxy => @aws_proxy_uri
-	)
+        )
         cfd.list_distributions.distribution_list.items.map { |name| name.id }
       end
 
@@ -28,9 +28,9 @@ module NewRelicAWS
         @cloudwatch = Aws::CloudWatch::Resource.new(
           :access_key_id     => @aws_access_key,
           :secret_access_key => @aws_secret_key,
-          :region            => "us-east-1"
+          :region            => "us-east-1",
           :http_proxy => @aws_proxy_uri
-	)
+        )
         @cloudwatch_delay = options[:cloudwatch_delay] || 60
 
         options[:period]     ||= 60
