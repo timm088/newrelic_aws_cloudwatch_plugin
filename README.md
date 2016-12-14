@@ -2,6 +2,7 @@
 
 This tool provides the metric collection agents for the following New Relic plugins:
 
+- DDB
 - EC2
 - EBS
 - ELB
