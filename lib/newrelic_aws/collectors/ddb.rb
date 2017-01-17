@@ -2,12 +2,13 @@ module NewRelicAWS
   module Collectors
     class DDB < Base
       def tables
-        ddb = AWS::DynamoDB.new(
+        ddb = Aws::DynamoDB::Client.new(
           :access_key_id => @aws_access_key,
           :secret_access_key => @aws_secret_key,
-          :proxy_uri         => @aws_proxy_uri
+          :region => @aws_region,
+          :http_proxy => @aws_proxy_uri
         )
-        ddb.tables.map { |table| table.name }
+        ddb.list_tables.table_names
       end
 
       def metric_list
