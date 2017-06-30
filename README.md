@@ -15,6 +15,7 @@ This tool provides the metric collection agents for the following New Relic plug
 - Kinesis
 - Lambda
 - CloudFront
+- ALB* Support is experimental, can't quite make it work. PR!
 
 ## Dependencies
 - A single t1.micro EC2 instance (in any region)
