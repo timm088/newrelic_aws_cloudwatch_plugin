@@ -7,7 +7,7 @@ module NewRelicAWS
           :secret_access_key => @aws_secret_key,
           :region => @aws_region
         )
-        alb.describe_load_balancers.load_balancer_descriptions.map { |load_balancer| load_balancer.load_balancer_name }
+        alb.describe_load_balancers.load_balancers.map { |load_balancer| load_balancer.load_balancer_name }
       end
 
       def metric_list
@@ -38,7 +38,7 @@ module NewRelicAWS
         load_balancers.each do |load_balancer_name|
           metric_list.each do |(metric_name, statistic, unit, default_value)|
             data_point = get_data_point(
-              :namespace     => "AWS/ELBv2",
+              :namespace     => "AWS/ApplicationELB",
               :metric_name   => metric_name,
               :statistic     => statistic,
               :unit          => unit,
