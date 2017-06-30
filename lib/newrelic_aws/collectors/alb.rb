@@ -2,12 +2,12 @@ module NewRelicAWS
   module Collectors
     class ALB < Base
       def load_balancers
-        alb = AWS::ELB.new(
+        alb = Aws::ElasticLoadBalancingV2::Client.new(
           :access_key_id => @aws_access_key,
           :secret_access_key => @aws_secret_key,
           :region => @aws_region
         )
-        alb.load_balancers.map { |load_balancer| load_balancer.name }
+        alb.describe_load_balancers.load_balancer_descriptions.map { |load_balancer| load_balancer.load_balancer_name }
       end
 
       def metric_list
@@ -16,8 +16,8 @@ module NewRelicAWS
           ["ClientTLSNegotiationErrorCount", "Sum", "Count", 0],
           ["ConsumedLBCapacityUnits", "Sum", "Count", 0],
           ["HealthyHostCount", "Maximum", "Count", 0],
-          ["HTTPCode_ELB_4XX", "Sum", "Count", 0],
-          ["HTTPCode_ELB_5XX", "Sum", "Count", 0],
+          ["HTTPCode_ALB_4XX", "Sum", "Count", 0],
+          ["HTTPCode_ALB_5XX", "Sum", "Count", 0],
           ["HTTPCode_Target_2XX_Count", "Sum", "Count", 0],
           ["HTTPCode_Target_3XX_Count", "Sum", "Count", 0],
           ["HTTPCode_Target_4XX_Count", "Sum", "Count", 0],
@@ -38,7 +38,7 @@ module NewRelicAWS
         load_balancers.each do |load_balancer_name|
           metric_list.each do |(metric_name, statistic, unit, default_value)|
             data_point = get_data_point(
-              :namespace     => "AWS/ApplicationELB",
+              :namespace     => "AWS/ELBv2",
               :metric_name   => metric_name,
               :statistic     => statistic,
               :unit          => unit,
